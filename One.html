@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ultimate Surprise Journey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;600&family=Bungee+Shade&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-pink: #ff758c;
+            --accent-purple: #7400b8;
+            --soft-white: #fff0f3;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+            background: #000;
+        }
+
+        /* Full Screen Pages */
+        .page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .active { display: flex; }
+
+        /* --- PAGE 1: THE FAKE GLITCH --- */
+        #page1 { background: #000; color: #0f0; font-family: 'Courier New', monospace; cursor: pointer; }
+        .glitch-text { font-size: 1.2rem; animation: flicker 0.1s infinite; }
+        @keyframes flicker { 0% { opacity: 1; } 50% { opacity: 0.8; } 100% { opacity: 0.9; } }
+
+        /* --- PAGE 2: THE MEMORY DANCE --- */
+        #page2 { background: linear-gradient(135deg, #7400b8, #6930c3); }
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            gap: 20px;
+        }
+        .memory-box {
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            animation: dance 2s infinite alternate ease-in-out;
+            border-radius: 15px;
+        }
+        @keyframes dance {
+            from { transform: rotate(-10deg) translateY(0); }
+            to { transform: rotate(10deg) translateY(-20px); }
+        }
+
+        /* --- PAGE 3: THE FLOWER GARDEN --- */
+        #page3 { background: radial-gradient(circle, #fff0f3 0%, #ffccd5 100%); }
+        .floating-obj { position: absolute; pointer-events: none; animation: floatUp 8s linear infinite; }
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- PAGE 4: THE MAGIC GIFT --- */
+        #page4 { background: #ff758c; }
+        .gift-box {
+            width: 150px;
+            height: 150px;
+            background: #ffd700;
+            position: relative;
+            cursor: pointer;
+            transition: 0.5s;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .gift-box:before { content: ''; position: absolute; width: 100%; height: 20px; background: #d4af37; top: 65px; }
+        .gift-box:after { content: ''; position: absolute; height: 100%; width: 20px; background: #d4af37; left: 65px; }
+        .gift-box.open { transform: scale(5); opacity: 0; }
+
+        /* --- PAGE 5: THE GRAND FINALE --- */
+        #page5 { background: #fff; overflow-y: auto; overflow-x: hidden; padding: 50px 0; }
+        .final-title { font-family: 'Bungee Shade', cursive; font-size: 4rem; color: #ff758c; text-align: center; }
+        .wish-wall { width: 80%; text-align: center; margin-top: 50px; }
+        .wish-card { 
+            background: #fff; border-radius: 20px; padding: 20px; margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); transform: translateY(50px); opacity: 0;
+            transition: 0.8s;
+        }
+        .wish-card.visible { transform: translateY(0); opacity: 1; }
+
+        /* Common Elements */
+        .next-btn {
+            margin-top: 40px;
+            padding: 12px 35px;
+            border-radius: 50px;
+            border: none;
+            background: #fff;
+            color: #ff758c;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        canvas { position: absolute; top: 0; left: 0; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1 -->
+    <div id="page1" class="page active" onclick="nextPage(2)">
+        <div class="glitch-text">
+            > INITIALIZING SURPRISE_PROTOCOL.EXE...<br>
+            > ERROR: TOO_MUCH_AWESOMENESS_DETECTED<br>
+            > CLICK ANYWHERE TO FIX SYSTEM
+        </div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div id="page2" class="page">
+        <h2 style="color: white; margin-bottom: 50px;">Collecting Happy Moments...</h2>
+        <div class="memory-grid">
+            <div class="memory-box" style="animation-delay: 0s;">📸</div>
+            <div class="memory-box" style="animation-delay: 0.2s;">✨</div>
+            <div class="memory-box" style="animation-delay: 0.4s;">🎁</div>
+            <div class="memory-box" style="animation-delay: 0.6s;">🍰</div>
+            <div class="memory-box" style="animation-delay: 0.8s;">🍭</div>
+            <div class="memory-box" style="animation-delay: 1s;">🎸</div>
+        </div>
+        <button class="next-btn" onclick="nextPage(3)">Proceed to Garden</button>
+    </div>
+
+    <!-- PAGE 3 -->
+    <div id="page3" class="page">
+        <h2 style="color: #d63384; font-family: 'Dancing Script'; font-size: 3rem;">The Magical Garden</h2>
+        <p>Pop the bubbles and enjoy the flowers!</p>
+        <button class="next-btn" onclick="nextPage(4)" style="background: #ff758c; color: white;">Look! A Gift!</button>
+    </div>
+
+    <!-- PAGE 4 -->
+    <div id="page4" class="page">
+        <h2 style="color: white; margin-bottom: 30px;">Special Delivery for You!</h2>
+        <div class="gift-box" id="gift" onclick="openGift()"></div>
+        <p style="color: white; margin-top: 20px;">Click the box to unwrap...</p>
+    </div>
+
+    <!-- PAGE 5 -->
+    <div id="page5" class="page">
+        <h1 class="final-title">HAPPY BIRTHDAY!</h1>
+        <div class="wish-wall" id="wishWall">
+            <!-- Wishes will be added here -->
+        </div>
+    </div>
+
+    <canvas id="fireworksCanvas"></canvas>
+
+    <script>
+        let currentPage = 1;
+
+        function nextPage(num) {
+            document.getElementById(`page${currentPage}`).classList.remove('active');
+            document.getElementById(`page${num}`).classList.add('active');
+            currentPage = num;
+
+            if(num === 3) startGarden();
+            if(num === 5) startFinale();
+        }
+
+        // --- GARDEN LOGIC ---
+        function startGarden() {
+            const emojis = ['🌸', '🌺', '🌻', '🌼', '🌷', '🌹', '🎈', '☁️'];
+            setInterval(() => {
+                if(currentPage !== 3) return;
+                const f = document.createElement('div');
+                f.className = 'floating-obj';
+                f.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+                f.style.left = Math.random() * 100 + 'vw';
+                f.style.fontSize = (Math.random() * 40 + 20) + 'px';
+                f.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                document.getElementById('page3').appendChild(f);
+                setTimeout(() => f.remove(), 10000);
+            }, 400);
+        }
+
+        // --- GIFT LOGIC ---
+        function openGift() {
+            const gift = document.getElementById('gift');
+            gift.classList.add('open');
+            setTimeout(() => {
+                nextPage(5);
+            }, 600);
+        }
+
+        // --- FINALE LOGIC ---
+        const wishes = [
+            "Aap hamesha aise hi khush rahein! 🌟",
+            "Zindagi ka har pal aapke liye ek nayi umeed laye. ✨",
+            "Aapki smile duniya ki sabse pyari cheez hai. 😊",
+            "Party hard and eat lots of cake! 🎂",
+            "Success hamesha aapke kadam choome. 🚀",
+            "Hamesha amazing raho, jaise aap ho! ❤️",
+            "Happy Birthday to the superstar! 🎈"
+        ];
+
+        function startFinale() {
+            const wall = document.getElementById('wishWall');
+            wishes.forEach((text, i) => {
+                setTimeout(() => {
+                    const card = document.createElement('div');
+                    card.className = 'wish-card';
+                    card.innerHTML = `<p style="font-size:1.2rem; color:#333;">${text}</p>`;
+                    wall.appendChild(card);
+                    // Force reflow for animation
+                    setTimeout(() => card.classList.add('visible'), 100);
+                }, i * 1500);
+            });
+            startFireworks();
+        }
+
+        // --- FIREWORKS CANVAS ---
+        const canvas = document.getElementById('fireworksCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+        function startFireworks() {
+            setInterval(() => {
+                if(currentPage !== 5) return;
+                createExplosion(Math.random() * canvas.width, Math.random() * canvas.height);
+            }, 800);
+            updateParticles();
+        }
+
+        function createExplosion(x, y) {
+            const color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            for(let i=0; i<30; i++) {
+                particles.push({
+                    x, y,
+                    vx: (Math.random() - 0.5) * 10,
+                    vy: (Math.random() - 0.5) * 10,
+                    alpha: 1,
+                    color
+                });
+            }
+        }
+
+        function updateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, i) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.alpha -= 0.01;
+                ctx.globalAlpha = p.alpha;
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+                ctx.fill();
+                if(p.alpha <= 0) particles.splice(i, 1);
+            });
+            requestAnimationFrame(updateParticles);
+        }
+    </script>
+</body>
+</html>
